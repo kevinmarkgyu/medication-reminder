@@ -54,7 +54,7 @@ app.post("/whatsapp-webhook", async (req, res) => {
       current_med: "",
       Calciumade: "N",
       Metformin: "N",
-      Med3: "N"
+      Vissane: "N"
     });
   }
 
@@ -90,13 +90,13 @@ app.post("/whatsapp-webhook", async (req, res) => {
 
   if (msg === "STATUS") {
     const missing = [];
-    ["Calciumade", "Metformin", "Med3"].forEach(med => {
+    ["Calciumade", "Metformin", "Vissane"].forEach(med => {
       if (data[med] === "N") missing.push(med);
     });
 
     const reply = missing.length === 0
-      ? "You have taken all medications today baba, Very good bum, I love you so much!"
-      : "You still need to take: " + missing.join(", ") + "Fightingg bum, love you!";
+      ? "You have taken all medications today baba, Very good bum, I love you so much!❤️❤️❤️"
+      : "You still need to take: " + missing.join(", ") + ". Fightingg bum, love you!❤️❤️❤️";
 
     await client.messages.create({
       from: WHATSAPP_FROM,
@@ -124,7 +124,7 @@ app.get("/test-Calciumade", async (req, res) => {
       current_med: "",
       Calciumade: "N",
       Metformin: "N",
-      Med3: "N"
+      Vissane: "N"
     });
   }
 
