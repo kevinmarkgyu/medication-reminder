@@ -70,12 +70,20 @@ app.post("/whatsapp-webhook", async (req, res) => {
       });
     } else {
       const value = msg === "YES" ? "Y" : "N";
-      await ref.update({ [currentMed]: value, current_med: "" });
-      await client.messages.create({
-        from: WHATSAPP_FROM,
-        to: USER_PHONE,
-        body: `${currentMed} updated as ${value === "Y" ? "taken ✅" : "not taken ❌"}`
+        if (value === "N") {
+            await client.messages.create({
+                from: WHATSAPP_FROM,
+                to: USER_PHONE,
+                body: `${currentMed} needs to be taken right now love. Take it now please, Reply "Yes" if already done. Love you ❤️`
       });
+      } else {
+        await ref.update({ [currentMed]: value, current_med: "" });
+        await client.messages.create({
+            from: WHATSAPP_FROM,
+            to: USER_PHONE,
+            body: `${currentMed} updated as taken ✅, Very Good baba, Love youuuu ❤️❤️❤️`
+      });
+      }
     }
     return res.send("<Response></Response>");
   }
@@ -87,8 +95,8 @@ app.post("/whatsapp-webhook", async (req, res) => {
     });
 
     const reply = missing.length === 0
-      ? "You have taken all medications today!"
-      : "You still need to take: " + missing.join(", ");
+      ? "You have taken all medications today baba, Very good bum, I love you so much!"
+      : "You still need to take: " + missing.join(", ") + "Fightingg bum, love you!";
 
     await client.messages.create({
       from: WHATSAPP_FROM,

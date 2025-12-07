@@ -41,9 +41,9 @@ async function sendMed(medName) {
     {
       date: t,
       current_med: medName,
-      Med1: doc.exists ? doc.data().Med1 : "N",
-      Med2: doc.exists ? doc.data().Med2 : "N",
-      Med3: doc.exists ? doc.data().Med3 : "N"
+      Calciumade: doc.exists ? doc.data().Calciumade : "N",
+      Metformin: doc.exists ? doc.data().Metformin : "N",
+      Vissane: doc.exists ? doc.data().Vissane : "N"
     },
     { merge: true }
   );
@@ -51,10 +51,10 @@ async function sendMed(medName) {
   await client.messages.create({
     from: WHATSAPP_FROM,
     to: USER_PHONE,
-    body: `Medication Reminder (${medName}): Did you take it? Reply Yes or No.`
+    body: `Hi baba, Gentle Medication Reminder (${medName}): Did you take it bum? Reply Yes or No. Love youuu ❤️❤️❤️`
   });
 
   console.log(`${medName} reminder sent for ${t}!`);
 }
 
-sendMed("Med1"); // Make sure to pass the correct string
+sendMed("Calciumade"); // Make sure to pass the correct string
