@@ -95,9 +95,18 @@ app.post("/whatsapp-webhook", async (req, res) => {
 
   res.send("<Response></Response>");
 });
+app.get("/test-med1", async (req, res) => {
+  await client.messages.create({
+    from: WHATSAPP_FROM,
+    to: USER_PHONE,
+    body: "Medication Reminder (Med1): Did you take Med1? Reply YES1 or NO1."
+  });
 
+  res.send("Med1 test reminder sent!");
+});
 // ----------------------
 // SERVER START
 // ----------------------
 const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => console.log("Server running on port", PORT));
+
