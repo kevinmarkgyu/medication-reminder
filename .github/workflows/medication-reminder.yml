@@ -1,0 +1,41 @@
+name: Medication Reminders
+
+on:
+  schedule:
+    # Runs every day at 08:00, 14:00, 22:00 UTC+8
+    - cron: '0 0 * * *'   # 08:00 UTC+8 → 00:00 UTC
+    - cron: '0 6 * * *'   # 14:00 UTC+8 → 06:00 UTC
+    - cron: '0 14 * * *'  # 22:00 UTC+8 → 14:00 UTC
+
+  workflow_dispatch: # Allows manual trigger from GitHub UI
+
+jobs:
+  send-reminder:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 24
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run medication reminder
+        run: |
+          if [ ${{ github.event.schedule }} == '0 0 * * *' ]; then
+            node sendMed1.js
+          elif [ ${{ github.event.schedule }} == '0 6 * * *' ]; then
+            node sendMed2.js
+          else
+            node sendMed3.js
+          fi
+        env:
+          FIREBASE_ADMIN_KEY: ${{ secrets.FIREBASE_ADMIN_KEY }}
+          TWILIO_SID: ${{ secrets.TWILIO_SID }}
+          TWILIO_TOKEN: ${{ secrets.TWILIO_TOKEN }}
+          TWILIO_WHATSAPP_FROM: ${{ secrets.TWILIO_WHATSAPP_FROM }}
+          USER_PHONE: ${{ secrets.USER_PHONE }}
