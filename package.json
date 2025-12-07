@@ -1,16 +1,22 @@
 {
   "name": "medication-reminder",
   "version": "1.0.0",
+  "description": "Automated WhatsApp medication reminder using Twilio and Firebase",
   "main": "server.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "sendMed1": "node sendMed1.js",
+    "sendMed2": "node sendMed2.js",
+    "sendMed3": "node sendMed3.js"
   },
+  "author": "Your Name",
+  "license": "MIT",
   "dependencies": {
+    "dotenv": "^16.1.5",
+    "firebase-admin": "^12.13.0",
+    "twilio": "^4.16.0",
     "express": "^4.18.2",
-    "twilio": "^4.0.0",
-    "firebase-admin": "^11.0.0",
-    "body-parser": "^1.20.2",
-    "dotenv": "^16.0.0"
+    "body-parser": "^1.20.2"
   }
 }
