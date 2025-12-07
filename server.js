@@ -52,8 +52,8 @@ app.post("/whatsapp-webhook", async (req, res) => {
     await ref.set({
       date: t,
       current_med: "",
-      Med1: "N",
-      Med2: "N",
+      Calciumade: "N",
+      Metformin: "N",
       Med3: "N"
     });
   }
@@ -90,7 +90,7 @@ app.post("/whatsapp-webhook", async (req, res) => {
 
   if (msg === "STATUS") {
     const missing = [];
-    ["Med1", "Med2", "Med3"].forEach(med => {
+    ["Calciumade", "Metformin", "Med3"].forEach(med => {
       if (data[med] === "N") missing.push(med);
     });
 
@@ -111,9 +111,9 @@ app.post("/whatsapp-webhook", async (req, res) => {
 });
 
 // ------------------------
-// Test route for Med1 reminder
+// Test route for Calciumade reminder
 // ------------------------
-app.get("/test-med1", async (req, res) => {
+app.get("/test-Calciumade", async (req, res) => {
   const t = today();
   const ref = db.collection("daily_medications").doc(t);
   const doc = await ref.get();
@@ -122,21 +122,21 @@ app.get("/test-med1", async (req, res) => {
     await ref.set({
       date: t,
       current_med: "",
-      Med1: "N",
-      Med2: "N",
+      Calciumade: "N",
+      Metformin: "N",
       Med3: "N"
     });
   }
 
-  await ref.update({ current_med: "Med1" });
+  await ref.update({ current_med: "Calciumade" });
 
   await client.messages.create({
     from: WHATSAPP_FROM,
     to: USER_PHONE,
-    body: "Medication Reminder (Med1): Did you take it? Reply Yes or No."
+    body: "Medication Reminder (Calciumade): Did you take it? Reply Yes or No."
   });
 
-  res.send("Med1 test reminder sent!");
+  res.send("Calciumade test reminder sent!");
 });
 
 // ------------------------
