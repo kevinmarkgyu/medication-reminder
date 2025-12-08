@@ -3,9 +3,9 @@ name: Medication Reminder
 on:
   schedule:
     # 08:00 UTC+8 → 00:00 UTC
-    - cron: '0 0 * * *'
+    - cron: '0 8 * * *'
     # 14:00 UTC+8 → 06:00 UTC
-    - cron: '0 6 * * *'
+    - cron: '0 10 * * *'
     # 22:00 UTC+8 → 14:00 UTC
     - cron: '0 14 * * *'
 
