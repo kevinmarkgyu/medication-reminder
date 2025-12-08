@@ -26,7 +26,7 @@ jobs:
         run: npm install
 
       - name: Send Med1 reminder
-        if: github.event.schedule == '0 0 * * *'
+        if: github.event.schedule == '0 8 * * *'
         run: node sendMed1.js
         env:
           FIREBASE_ADMIN_KEY: ${{ secrets.FIREBASE_ADMIN_KEY }}
@@ -36,7 +36,7 @@ jobs:
           USER_PHONE: ${{ secrets.USER_PHONE }}
 
       - name: Send Med2 reminder
-        if: github.event.schedule == '0 6 * * *'
+        if: github.event.schedule == '0 10 * * *'
         run: node sendMed2.js
         env:
           FIREBASE_ADMIN_KEY: ${{ secrets.FIREBASE_ADMIN_KEY }}
